@@ -1,12 +1,15 @@
 import { Controller, Get, Post, Put, Patch, Delete, Body, Param } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Todo } from './entities/todo.entity';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   // Lấy tất cả Todo
+  
   @Get()
   getAll(): Promise<Todo[]> {
     return this.todosService.findAll();
